@@ -1,4 +1,4 @@
-import { Ghost } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -41,13 +41,24 @@ export default function Header() {
       </div>
       <div className='flex lg:justify-center lg:items-center gap-2 lg:gap-12 '>
         <NavLink href={"/#pricing"}>Pricing</NavLink>
-        <NavLink href={"/#posts"}>Your Posts</NavLink>
+        <SignedIn>
+          <NavLink href={"/#posts"}>Your Posts</NavLink>
+        </SignedIn>
       </div>
-      <div className="flex lg:justify-end lg:flex-1">
-        <div className="flex gap-2 items-center">
-        <NavLink href={"/dashboard"}>Upload a Video</NavLink>
-        <NavLink href={"/sign-in"}>Sign In</NavLink>
+      <div className='flex lg:justify-end lg:flex-1'>
+        <div className='flex gap-2 items-center'>
+          <SignedIn>
+            <NavLink href={"/dashboard"}>Upload a Video</NavLink>
+          </SignedIn>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
+          <SignedOut>
+            <SignInButton>
+              <NavLink href={"/sign-in"}>Sign In</NavLink>
+            </SignInButton>
+          </SignedOut>
       </div>
     </nav>
   );
